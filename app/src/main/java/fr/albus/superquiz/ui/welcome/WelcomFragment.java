@@ -24,8 +24,7 @@ public class WelcomFragment extends Fragment {
     FragmentWelcomBinding binding;
 
     public static WelcomFragment newInstance() {
-        WelcomFragment fragment = new WelcomFragment();
-        return fragment;
+        return new WelcomFragment();
     }
 
     @Override
@@ -35,7 +34,7 @@ public class WelcomFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         // Inflate the layout for this fragment
@@ -72,7 +71,7 @@ public class WelcomFragment extends Fragment {
                 FragmentManager fragmentManager = getParentFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 QuizFragment quizFragment = new QuizFragment();
-                fragmentTransaction.replace(R.id.fragment_container_view_tag, quizFragment);
+                fragmentTransaction.replace(R.id.container, quizFragment);
                 fragmentTransaction.commit();
             }
         });

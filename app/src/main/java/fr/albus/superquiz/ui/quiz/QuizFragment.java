@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -24,6 +25,7 @@ import java.util.List;
 import fr.albus.superquiz.R;
 import fr.albus.superquiz.data.Question;
 import fr.albus.superquiz.databinding.FragmentQuizBinding;
+import fr.albus.superquiz.databinding.FragmentWelcomBinding;
 import fr.albus.superquiz.injection.ViewModelFactory;
 import fr.albus.superquiz.ui.welcome.WelcomFragment;
 
@@ -45,6 +47,15 @@ public class QuizFragment extends Fragment {
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelProvider(this, ViewModelFactory.getInstance()).get(QuizViewModel.class);
 
+
+
+    }
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        // Inflate the layout for this fragment
+        binding = FragmentQuizBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 
     @Override
@@ -123,12 +134,6 @@ public class QuizFragment extends Fragment {
         dialog.show();
     }
 
-    private void goToWelcomeFragment() {
-        WelcomFragment welcomFragment = WelcomFragment.newInstance();
-        FragmentManager fragmentManager = getParentFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container_view_tag, welcomFragment).commit();
-    }
 
     private void resetQuestion() {
         List<Button> allAnswers = Arrays.asList(binding.answer1, binding.answer2, binding.answer3, binding.answer4);
@@ -174,6 +179,12 @@ public class QuizFragment extends Fragment {
         binding.answer3.setText(question.getChoiceList().get(2));
         binding.answer4.setText(question.getChoiceList().get(3));
 
+    }
+    private void goToWelcomeFragment() {
+        WelcomFragment welcomFragment = WelcomFragment.newInstance();
+        FragmentManager fragmentManager = getParentFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.container, welcomFragment).commit();
     }
 
 
